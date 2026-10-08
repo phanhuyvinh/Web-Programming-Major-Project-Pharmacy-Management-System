@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - Nhà thuốc trực tuyến</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="top-bar">
+            <span>📍 Tìm nhà thuốc</span>
+            <span>Tra cứu đơn hàng</span>
+            <span>Hotline: 1800 0000</span>
+        </div>
+
+        <div class="main-header">
+            <a class="logo" href="index.html">
+                <span>✚</span> MedCare
+            </a>
+
+            <div class="search-box">
+                <input id="searchInput" type="text"
+                       placeholder="Tìm kiếm thuốc, vitamin, sản phẩm...">
+                <button id="searchBtn">🔍</button>
+            </div>
+
+            <div class="header-actions">
+                <button>👤 Tài khoản</button>
+                <button id="cartBtn">🛒 Giỏ hàng <b id="cartCount">0</b></button>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a class="active" href="#">Trang chủ</a>
+            <a href="#">Thuốc</a>
+            <a href="#">Vitamin & Khoáng chất</a>
+            <a href="#">Dược mỹ phẩm</a>
+            <a href="#">Thiết bị y tế</a>
+            <a href="#">Chăm sóc cá nhân</a>
+            <a href="#">Mẹ & Bé</a>
+            <a href="#">Khuyến mãi</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">NHÀ THUỐC TRỰC TUYẾN</p>
+                <h1>Chăm sóc sức khỏe<br>cho cả gia đình</h1>
+                <p>Sản phẩm đa dạng · Nguồn gốc rõ ràng · Giao hàng nhanh</p>
+                <button class="primary-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+                    Mua sắm ngay
+                </button>
+            </div>
+            <div class="hero-icon">💊</div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">
+                <div>
+                    <p class="eyebrow">KHÁM PHÁ</p>
+                    <h2>Danh mục nổi bật</h2>
+                </div>
+            </div>
+
+            <div class="categories">
+                <div class="category">💊<span>Thuốc</span></div>
+                <div class="category">🍊<span>Vitamin</span></div>
+                <div class="category">🧴<span>Dược mỹ phẩm</span></div>
+                <div class="category">🩺<span>Thiết bị y tế</span></div>
+                <div class="category">🧼<span>Chăm sóc cá nhân</span></div>
+                <div class="category">👶<span>Mẹ & Bé</span></div>
+            </div>
+        </section>
+
+        <section class="section" id="products">
+            <div class="section-title">
+                <div>
+                    <p class="eyebrow">SẢN PHẨM</p>
+                    <h2>Sản phẩm nổi bật</h2>
+                </div>
+                <select id="sortSelect">
+                    <option value="default">Sắp xếp</option>
+                    <option value="low">Giá thấp → cao</option>
+                    <option value="high">Giá cao → thấp</option>
+                </select>
+            </div>
+
+            <div id="productList" class="products"></div>
+        </section>
+
+        <section class="health-banner">
+            <div>
+                <p class="eyebrow">MEDCARE CARE</p>
+                <h2>Đặt thuốc dễ dàng,<br>chăm sóc sức khỏe an tâm.</h2>
+                <p>Website mẫu được xây dựng bằng HTML, CSS và JavaScript, sẵn sàng kết nối ASP.NET Core Web API.</p>
+            </div>
+            <div class="health-icon">🩺</div>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <div class="logo"><span>✚</span> MedCare</div>
+            <p>Nhà thuốc trực tuyến - giao diện demo cho bài tập lớn.</p>
+        </div>
+        <div>
+            <h3>Hỗ trợ</h3>
+            <p>Chính sách giao hàng</p>
+            <p>Hướng dẫn mua hàng</p>
+        </div>
+        <div>
+            <h3>Liên hệ</h3>
+            <p>Hotline: 1800 0000</p>
+            <p>Email: support@medcare.vn</p>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+</html>

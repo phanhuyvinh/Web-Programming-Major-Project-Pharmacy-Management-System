@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm - MedCare</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/customer.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="top-bar">
+            <span>📍 Tìm nhà thuốc</span>
+            <a href="orders.html">Tra cứu đơn hàng</a>
+            <span>Hotline: 1800 0000</span>
+        </div>
+        <div class="main-header">
+            <a class="logo" href="../index.html"><span>✚</span> MedCare</a>
+            <form class="search-box" onsubmit="event.preventDefault(); location.href='products.html?q='+encodeURIComponent(this.q.value)">
+                <input name="q" id="topSearch" type="text" placeholder="Tìm kiếm thuốc, vitamin...">
+                <button type="submit">🔍</button>
+            </form>
+            <div class="header-actions">
+                <span id="authArea"></span>
+                <a href="cart.html" class="link-btn">🛒 Giỏ hàng <b id="cartCount">0</b></a>
+            </div>
+        </div>
+        <nav class="nav">
+            <a href="../index.html">Trang chủ</a>
+            <a class="active" href="products.html">Thuốc & Sản phẩm</a>
+            <a href="consultation.html">💬 Tư vấn trực tuyến</a>
+            <a href="prescription.html">Đơn thuốc</a>
+            <a href="orders.html">Đơn hàng</a>
+        </nav>
+    </header>
+
+    <main class="page-wrap">
+        <h1 style="margin-bottom:18px">Danh sách sản phẩm</h1>
+
+        <div class="catalog">
+            <aside class="filters">
+                <h3>Bộ lọc</h3>
+
+                <div class="filter-block">
+                    <label>Từ khóa</label>
+                    <input id="filterKeyword" type="text" placeholder="Tên hoặc hoạt chất"
+                           style="width:100%;padding:8px;border:1px solid #dce3e3;border-radius:8px">
+                </div>
+
+                <div class="filter-block">
+                    <h4 style="font-size:14px;margin-bottom:6px">Nhóm sản phẩm</h4>
+                    <label><input type="radio" name="cat" value="">Tất cả</label>
+                    <label><input type="radio" name="cat" value="Thuốc">Thuốc</label>
+                    <label><input type="radio" name="cat" value="Vitamin">Vitamin</label>
+                    <label><input type="radio" name="cat" value="Dược mỹ phẩm">Dược mỹ phẩm</label>
+                    <label><input type="radio" name="cat" value="Thiết bị y tế">Thiết bị y tế</label>
+                    <label><input type="radio" name="cat" value="Chăm sóc cá nhân">Chăm sóc cá nhân</label>
+                    <label><input type="radio" name="cat" value="Mẹ & Bé">Mẹ & Bé</label>
+                </div>
+
+                <div class="filter-block">
+                    <h4 style="font-size:14px;margin-bottom:6px">Khoảng giá</h4>
+                    <label><input type="checkbox" name="price" value="low">Dưới 100.000đ</label>
+                    <label><input type="checkbox" name="price" value="mid">100.000đ – 500.000đ</label>
+                    <label><input type="checkbox" name="price" value="high">Trên 500.000đ</label>
+                </div>
+            </aside>
+
+            <section>
+                <div class="section-title">
+                    <div class="text-muted">Kết quả tìm kiếm</div>
+                    <select id="sortSelect">
+                        <option value="default">Sắp xếp mặc định</option>
+                        <option value="low">Giá tăng dần</option>
+                        <option value="high">Giá giảm dần</option>
+                        <option value="rating">Phổ biến nhất</option>
+                    </select>
+                </div>
+                <div id="productList" class="products"></div>
+            </section>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/customer.js"></script>
+</body>
+</html>

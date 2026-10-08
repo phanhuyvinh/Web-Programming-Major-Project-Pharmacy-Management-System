@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thuốc - Admin</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="dash-layout">
+        <aside class="dash-sidebar">
+            <a class="brand" href="index.html"><span>✚</span> MedCare</a>
+            <div class="side-sep">Quản trị</div>
+            <nav>
+                <a href="index.html">📊 Tổng quan</a>
+                <a class="active" href="medicines.html">💊 Thuốc</a>
+                <a href="categories.html">🗂️ Danh mục</a>
+                <a href="suppliers.html">🏭 Nhà cung cấp</a>
+                <a href="nhap-kho.html">📥 Nhập kho</a>
+                <a href="users.html">👥 Người dùng</a>
+                <a href="reports.html">📈 Báo cáo</a>
+            </nav>
+            <div class="side-sep">Liên kết</div>
+            <nav>
+                <a href="../index.html">🏠 Trang chủ khách hàng</a>
+                <a href="../pharmacist/index.html">💼 Khu vực Dược sĩ</a>
+            </nav>
+        </aside>
+
+        <main class="dash-main">
+            <div class="dash-header">
+                <div>
+                    <div class="breadcrumb">Admin / Thuốc</div>
+                    <h1>Quản lý thuốc</h1>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <span id="authArea"></span>
+                    <!-- hoặc đơn giản: -->
+                    <!-- <button class="btn danger" onclick="handleLogout(event)">Đăng xuất</button> -->
+                </div>
+                <button class="btn" id="btnAddMed">+ Thêm thuốc</button>
+            </div>
+
+            <div class="panel">
+                <div class="table-wrap">
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên thuốc</th>
+                                <th>Hoạt chất</th>
+                                <th>Giá</th>
+                                <th>Tồn kho</th>
+                                <th>Danh mục</th>
+                                <th>Nhà cung cấp</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="medBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>       <!-- THÊM -->
+    <script src="../js/admin.js"></script>
+    <script> requireRole("admin"); </script>
+</body>
+</html>

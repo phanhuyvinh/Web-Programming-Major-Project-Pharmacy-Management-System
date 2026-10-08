@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm - MedCare</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/customer.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="top-bar">
+            <span>📍 Tìm nhà thuốc</span>
+            <a href="orders.html">Tra cứu đơn hàng</a>
+            <span>Hotline: 1800 0000</span>
+        </div>
+        <div class="main-header">
+            <a class="logo" href="../index.html"><span>✚</span> MedCare</a>
+            <form class="search-box" onsubmit="event.preventDefault(); location.href='products.html?q='+encodeURIComponent(this.q.value)">
+                <input name="q" type="text" placeholder="Tìm kiếm thuốc, vitamin...">
+                <button type="submit">🔍</button>
+            </form>
+            <div class="header-actions">
+                <span id="authArea"></span>
+                <a href="cart.html" class="link-btn">🛒 Giỏ hàng <b id="cartCount">0</b></a>
+            </div>
+        </div>
+        <nav class="nav">
+            <a href="../index.html">Trang chủ</a>
+            <a href="products.html">Thuốc & Sản phẩm</a>
+            <a href="consultation.html">💬 Tư vấn trực tuyến</a>
+            <a href="prescription.html">Đơn thuốc</a>
+            <a href="orders.html">Đơn hàng</a>
+        </nav>
+    </header>
+
+    <main class="page-wrap" id="pdBox">
+        <p class="text-muted mb-16"><a href="products.html">← Quay lại danh sách</a></p>
+
+        <div class="pd-wrap">
+            <div class="pd-img" id="pdIcon">💊</div>
+            <div class="pd-info">
+                <span class="badge success" id="pdCat">--</span>
+                <h1 id="pdName">--</h1>
+                <div class="meta">
+                    Hoạt chất: <b id="pdActive">--</b> ·
+                    Đơn vị: <b id="pdUnit">--</b>
+                </div>
+                <div class="price-lg" id="pdPrice">--</div>
+                <div class="meta">Tồn kho: <b id="pdStock">--</b></div>
+
+                <div class="qty">
+                    <button id="pdMinus">−</button>
+                    <input id="pdQty" type="number" min="1" value="1">
+                    <button id="pdPlus">+</button>
+                </div>
+
+                <div class="cta">
+                    <button class="add-cart" id="pdAdd" style="flex:1;padding:12px">Thêm vào giỏ</button>
+                    <button class="primary-btn" id="pdBuy" style="flex:1">Mua ngay</button>
+                </div>
+
+                <div class="desc">
+                    <h3 class="mt-24 mb-8">Mô tả sản phẩm</h3>
+                    <p id="pdDesc">--</p>
+
+                    <h3 class="mt-24 mb-8">Thông tin thêm</h3>
+                    <p>Nhà cung cấp: <b id="pdSupplier">--</b></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/customer.js"></script>
+</body>
+</html>

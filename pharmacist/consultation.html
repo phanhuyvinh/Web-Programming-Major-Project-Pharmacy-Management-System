@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tư vấn trực tuyến - Dược sĩ</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pharmacy.css">
+</head>
+<body>
+    <div class="dash-layout">
+        <aside class="dash-sidebar">
+            <a class="brand" href="index.html"><span>✚</span> MedCare</a>
+            <div class="side-sep">Nghiệp vụ Dược sĩ</div>
+            <nav>
+                <a href="index.html">📊 Tổng quan</a>
+                <a href="pos.html">💵 Bán tại quầy POS</a>
+                <a href="online-orders.html">📦 Đơn online</a>
+                <a href="inventory-alert.html">⚠️ Cảnh báo kho</a>
+                <a class="active" href="consultation.html">💬 Tư vấn trực tuyến</a>
+            </nav>
+            <div class="side-sep">Liên kết</div>
+            <nav>
+                <a href="../index.html">🏠 Trang chủ khách hàng</a>
+                <a href="../admin/index.html">🛡️ Khu vực Admin</a>
+            </nav>
+        </aside>
+
+        <main class="dash-main">
+            <div class="dash-header">
+                <div>
+                    <div class="breadcrumb">Dược sĩ / Tư vấn trực tuyến</div>
+                    <h1>Tư vấn trực tuyến</h1>
+                </div>
+            </div>
+
+            <div class="chat-layout pharmacist-chat" id="chatRoot">
+                <aside class="chat-conv-list">
+                    <div class="chat-conv-head">💬 Hội thoại</div>
+                    <div id="chatConvList" class="chat-conv-body"></div>
+                </aside>
+
+                <section class="chat-panel">
+                    <div class="chat-header">
+                        <div class="chat-peer" id="chatHeader">Chọn một cuộc trò chuyện</div>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages"></div>
+
+                    <div class="chat-input-bar">
+                        <textarea id="chatInput" rows="1"
+                                  placeholder="Nhập câu trả lời... (Enter để gửi)"></textarea>
+                        <button id="chatSend" class="primary-btn">Gửi ➤</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script> requireRole("pharmacist"); </script>
+    <script src="../js/pharmacy.js"></script>
+    <script src="../js/chat.js"></script>
+</body>
+</html>

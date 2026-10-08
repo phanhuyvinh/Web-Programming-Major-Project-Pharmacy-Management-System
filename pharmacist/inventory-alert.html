@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cảnh báo kho - MedCare</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pharmacy.css">
+</head>
+<body>
+    <div class="dash-layout">
+        <aside class="dash-sidebar">
+            <a class="brand" href="index.html"><span>✚</span> MedCare</a>
+            <div class="side-sep">Nghiệp vụ Dược sĩ</div>
+            <nav>
+                <a href="index.html">📊 Tổng quan</a>
+                <a href="pos.html">💵 Bán tại quầy POS</a>
+                <a href="online-orders.html">📦 Đơn online</a>
+                <a class="active" href="inventory-alert.html">⚠️ Cảnh báo kho</a>
+                <a href="consultation.html">💬 Tư vấn trực tuyến</a>
+            </nav>
+            <div class="side-sep">Liên kết</div>
+            <nav>
+                <a href="../index.html">🏠 Trang chủ khách hàng</a>
+                <a href="../admin/index.html">🛡️ Khu vực Admin</a>
+            </nav>
+        </aside>
+
+        <main class="dash-main">
+            <div class="dash-header">
+                <div>
+                    <div class="breadcrumb">Dược sĩ / Cảnh báo kho</div>
+                    <h1>Cảnh báo kho</h1>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <span id="authArea"></span>
+                    <!-- hoặc đơn giản: -->
+                    <!-- <button class="btn danger" onclick="handleLogout(event)">Đăng xuất</button> -->
+                </div>
+            </div>
+            <div id="alertRoot"></div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>       <!-- THÊM -->
+    <script src="../js/pharmacy.js"></script>
+    <script> requireRole("pharmacist"); </script>
+</body>
+</html>

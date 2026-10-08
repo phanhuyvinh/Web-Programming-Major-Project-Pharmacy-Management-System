@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - MedCare</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <a class="auth-logo" href="../index.html"><span>✚</span> MedCare</a>
+        <!-- Hiển thị khi ĐÃ đăng nhập -->
+        <div id="alreadyLogged" style="display:none">
+            <h2>Bạn đã đăng nhập</h2>
+            <p class="sub" id="loggedAs"></p>
+            <div style="display:flex;gap:8px;margin-top:14px">
+                <a id="goDashBtn" class="primary-btn" style="flex:1;text-align:center;text-decoration:none;padding:12px">Vào hệ thống</a>
+                <button type="button" class="btn danger" style="flex:1" onclick="handleLogout(event)">Đăng xuất</button>
+            </div>
+            <a class="back" href="../index.html" style="margin-top:20px">← Về trang chủ</a>
+        </div>
+        <div id="alreadyLogged" style="display:none">
+            <h2>Không đủ quyền truy cập</h2>
+            <p class="sub" id="loggedAs"></p>
+            <div style="display:flex;gap:8px;margin-top:14px">
+                <a id="goDashBtn" class="primary-btn"
+                style="flex:1;text-align:center;text-decoration:none;padding:12px">
+                Vào hệ thống
+                </a>
+                <button type="button" class="btn danger" style="flex:1"
+                        onclick="handleLogout(event)">Đăng xuất</button>
+            </div>
+            <a class="back" href="../index.html" style="margin-top:20px">← Về trang chủ</a>
+        </div>
+        <!-- Form đăng nhập (ẩn khi đã đăng nhập) -->
+        <div id="loginBlock">
+            <h2>Đăng nhập</h2>
+            <p class="sub">Chào mừng bạn trở lại MedCare Pharmacy</p>
+        </div>
+
+        <div class="role-hint" id="roleHint">
+            <b>Demo:</b> email bắt đầu bằng <code>admin...</code> → vào Admin,
+            <code>pharma...</code> → vào Dược sĩ, còn lại → Khách hàng.
+        </div>
+
+        <form onsubmit="handleLoginSubmit(event)" novalidate>
+            <div class="form-field">
+                <label>Email / Số điện thoại</label>
+                <input name="email" type="text" placeholder="you@example.com" required>
+            </div>
+            <div class="form-field">
+                <label>Mật khẩu</label>
+                <input name="password" type="password" placeholder="••••••" required>
+            </div>
+            <div class="row-check">
+                <label><input type="checkbox"> Ghi nhớ đăng nhập</label>
+                <a href="#">Quên mật khẩu?</a>
+            </div>
+            <button type="submit">Đăng nhập</button>
+        </form>
+
+        <div class="switch">
+            Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
+        </div>
+        <a class="back" href="../index.html">← Về trang chủ</a>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <!-- <script>
+    // Đổi tiêu đề theo ?role= để người dùng biết đang đăng nhập khu vực nào
+    (function () {
+        const role = (new URLSearchParams(location.search).get("role") || "").toLowerCase();
+        const title = document.getElementById("loginTitle");
+        const sub   = document.getElementById("loginSubtitle");
+        const hint  = document.getElementById("roleHint");
+        if (role === "pharmacist") {
+            title.textContent = "Đăng nhập Dược sĩ";
+            sub.textContent   = "Khu vực nghiệp vụ dành cho Dược sĩ / Nhân viên";
+            hint.innerHTML    = '<b>Demo:</b> dùng email bắt đầu bằng <code>pharma...</code>';
+        } else if (role === "admin") {
+            title.textContent = "Đăng nhập Quản trị";
+            sub.textContent   = "Khu vực dành riêng cho Quản trị viên hệ thống";
+            hint.innerHTML    = '<b>Demo:</b> dùng email bắt đầu bằng <code>admin...</code>';
+        }
+    })();
+    </script> -->
+    <script>
+        /* ============================================================
+        Xử lý khi trang login được mở mà user đã đăng nhập:
+        - Nếu đã login & role phù hợp với ?role=  → chuyển thẳng.
+        - Nếu không phù hợp                        → hiện khối "đã đăng nhập".
+        ============================================================ */
+        (function () {
+            const u = (typeof getCurrentUser === "function") ? getCurrentUser() : null;
+            const params = new URLSearchParams(location.search);
+            const required = (params.get("role") || "customer").toLowerCase();
+            const next = params.get("next");
+
+            if (!u) return; // chưa login → để form hiện bình thường
+
+            // Kiểm tra quyền truy cập
+            const isAllowed =
+                required === "customer" ||
+                u.role === required ||
+                u.role === "admin";           // admin bao trùm
+
+            // Chọn trang đích
+            let target = "products.html";
+            if (required === "admin" && u.role === "admin") {
+                target = "../admin/index.html";
+            } else if (required === "pharmacist" && (u.role === "pharmacist" || u.role === "admin")) {
+                target = "../pharmacist/index.html";
+            } else if (required === "customer" && next) {
+                target = ".." + next;
+            }
+
+            if (isAllowed) {
+                // Đã login đúng quyền → chuyển thẳng, KHÔNG hiện form
+                const overlay = document.createElement("div");
+                overlay.style.cssText =
+                    "position:fixed;inset:0;display:grid;place-items:center;" +
+                    "background:#f4fbf8;font-family:Arial;font-size:16px;" +
+                    "color:#0b8f66;font-weight:600;z-index:9999";
+                overlay.textContent = "Đang chuyển hướng...";
+                document.body.appendChild(overlay);
+                location.replace(target);
+                return;
+            }
+
+            // Đã login NHƯNG sai quyền → hiện khối "đã đăng nhập"
+            const form = document.querySelector("form");
+            if (form) form.style.display = "none";
+            const hint = document.querySelector(".role-hint");
+            if (hint) hint.style.display = "none";
+            const sw = document.querySelector(".switch");
+            if (sw) sw.style.display = "none";
+
+            const block = document.getElementById("alreadyLogged");
+            if (block) {
+                block.style.display = "block";
+                document.getElementById("loggedAs").textContent =
+                    "Bạn đang đăng nhập với vai trò '" + (u.role || "customer") + "' (" +
+                    (u.name || u.email) + "). Khu vực này yêu cầu quyền '" + required + "'.";
+
+                const btn = document.getElementById("goDashBtn");
+                if (u.role === "admin")           btn.href = "../admin/index.html";
+                else if (u.role === "pharmacist") btn.href = "../pharmacist/index.html";
+                else                              btn.href = "products.html";
+            }
+        })();
+    </script>
+</body>
+</html>
